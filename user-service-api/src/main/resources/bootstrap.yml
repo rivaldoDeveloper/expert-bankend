@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: user-service-api
+  profiles:
+    active: ${PROFILE_ACTIVE:dev}
+  cloud:
+    config:
+      name: user-service-api
+      uri: ${CONFIG_SERVER_URI:http://localhost:8888}

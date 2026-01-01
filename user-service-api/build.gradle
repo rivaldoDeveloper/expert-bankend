@@ -1,0 +1,34 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.3'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'br.com.rivaldo'
+version = '1.0.0'
+description = 'Rivaldo project for Spring Boot'
+
+apply from: 'gradle/plugins/dependencies.gradle'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+bootRun {
+    systemProperties = [
+            'spring.application.name': 'user-service-api',
+            'spring.profiles.active': 'dev'
+    ]
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

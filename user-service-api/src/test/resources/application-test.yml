@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: user-service-api-test
+  data:
+    mongodb:
+      uri: mongodb+srv://help-desk-user:desk-user@clusterhelpdesk.nudeiet.mongodb.net/helpdeskdb?appName=ClusterHelpDesk
+      auto-index-creation: true
+springdoc:
+  openapi:
+    title: 'User Service API'
+    description: 'Component responsible for user management created on Formacao BackEnd Expert with Rivaldo Souza'
+    version: '1.0.0'
