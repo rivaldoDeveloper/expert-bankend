@@ -1,0 +1,86 @@
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {url 'https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates'}
+}
+
+ext {
+    set('springCloudVersion', '2023.0.3')
+}
+
+dependencies {
+    implementation ('org.springframework.boot:spring-boot-starter-web') {
+        because('Starter para desenvolvimento de aplicativos web com Spring boot')
+    }
+
+    implementation ('org.springframework.cloud:spring-cloud-starter-config') {
+        because('Starter para configuração do Spring cloud')
+    }
+
+    implementation ('org.springframework.cloud:spring-cloud-starter-bootstrap') {
+        because('Starter para configuração do Spring cloud')
+    }
+
+    implementation ('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') {
+        because('Starter para integração com o Eureka Discovery Client')
+    }
+
+    implementation ('org.springframework.boot:spring-boot-starter-data-mongodb') {
+        because('Starter para acesso a dados com o MongoDB')
+    }
+
+    implementation ('org.springframework.boot:spring-boot-starter-validation') {
+        because('Starter para validação de dados')
+    }
+
+    implementation ('br.com.rivaldo:hd-commons-lib:1.0.0') {
+        because('Biblioteca de código comum entre projetos')
+    }
+
+    implementation ('org.springframework.boot:spring-boot-starter-security') {
+        because('Starter para segurança')
+    }
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+
+    implementation ('javax.xml.bind:jaxb-api:2.4.0-b180830.0359') {
+        because('Java Architecture for XML Binding')
+    }
+
+    implementation 'org.jspecify:jspecify:1.0.0'
+
+    implementation ('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0') {
+        because('Starter para geração de documentação OpenAPI com Springdoc')
+    }
+
+    //Lombok - Redução de código bilerplate
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    //Mapstruct - Mapreamento de objetos Java
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+    testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+        because('Starter para testes')
+    }
+
+//    testImplementation ('uk.co.jemos.podam:podam:7.2.6.RELEASE') {
+//        because('Podam')
+//    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+    ignoreFailures = true   // Ignora falhas de teste
+}
