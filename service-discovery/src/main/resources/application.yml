@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: service-discovery
+  profiles:
+    active: ${PROFILE_ACTIVE}
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI}
+  output:
+    ansi:
+      enabled: ALWAYS
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: America/Sao_Paulo
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+server:
+  port: ${SERVER_PORT:8761}
