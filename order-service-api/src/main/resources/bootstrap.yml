@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: order-service-api
+  profiles:
+    active: ${PROFILE_ACTIVE}
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI}
