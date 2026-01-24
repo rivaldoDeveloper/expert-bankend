@@ -1,0 +1,49 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - helpdesk
+
+  config-server:
+    image: rivald/backend-expert-configs
+    container_name: config-server
+    environment:
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/rivaldoDeveloper/backend-expert-configs
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME=rivaldoDeveloper
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD=PASSWORD
+      - SERVER_PORT=8888
+      - PROFILE_ACTIVE=default  # ADICIONE ESTA LINHA
+    ports:
+      - "8888:8888"
+    networks:
+      - helpdesk
+
+  service-discovery:
+    image: rivald/helpdesk-service-discovery
+    container_name: service-discovery
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - CONFIG_SERVER_URI=http://config-server:8888
+      - SPRING_APPLICATION_NAME=service-discovery
+      - SERVER_PORT=8761
+      - PROFILE_ACTIVE=default  # ADICIONE ESTA LINHA TAMBÉM
+    ports:
+      - "8761:8761"
+    # O segredo está aqui: esperamos 12 segundos antes de iniciar o Java
+    entrypoint: >
+      sh -c "sleep 12 && java -jar /app.jar"
+    depends_on:
+      - config-server
+    networks:
+      - helpdesk
+
+networks:
+  helpdesk:
+    driver: bridge
