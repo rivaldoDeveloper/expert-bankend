@@ -13,6 +13,10 @@ dependencies {
         because('Starter para desenvolvimento de aplicativos web com Spring Boot')
     }
 
+    implementation('org.springframework.boot:spring-boot-starter-amqp') {
+        because('Starter para integração com o RabbitMQ')
+    }
+
     implementation('org.springframework.cloud:spring-cloud-starter-config') {
         because('Starter para configuração do Spring Cloud Config')
     }
