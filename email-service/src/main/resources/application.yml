@@ -1,0 +1,9 @@
+server:
+  port: ${PORT:9090}
+spring:
+  application:
+    name: 'email-service'
+#  amqp:
+#    deserialization:
+#      trust:
+#        allowed-patterns: "br.com.rivaldo.*,java.util.*,java.lang.*"
