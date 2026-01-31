@@ -5,18 +5,8 @@ spring:
     name: 'email-service'
 
 mail:
-  host: ${MAIL_HOST}
-  port: ${MAIL_PORT}
+  host: ${MAIL_HOST:smtp.gmail.com}
+  port: ${MAIL_PORT:587}
   username: ${MAIL_USERNAME}
   password: ${MAIL_PASSWORD}
   protocol: ${MAIL_PROTOCOL:smtp}
-  text-created-order-confirmation: |
-    Olá %s, sua ordem foi criada com sucesso!
-    
-    Detalhes da ordem:
-    - ID %s
-    - Titulo: %s
-    - Descrição: %s
-    - Data de criação: %s
-    - Status: %s
-    - Técncio responsável: %s
