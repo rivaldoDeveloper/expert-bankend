@@ -1,6 +1,8 @@
 package br.com.rivaldo.email_service.listeners;
 
+import br.com.rivaldo.email_service.service.EmailService;
 import br.com.rivaldo.models.dtos.OrderCreatedMessage;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -10,8 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-public class
-OrderListener {
+@RequiredArgsConstructor
+public class OrderListener {
+
+    private final EmailService emailService;
 
     @RabbitListener(bindings = @QueueBinding(
             exchange = @Exchange(value = "helpdesk", type = "topic"),
@@ -20,5 +24,6 @@ OrderListener {
     ))
     public void listener(final OrderCreatedMessage message) {
         log.info("Order de serviço processada com sucesso: {}", message);
+        emailService.sendMail(message);
     }
 }
