@@ -1,6 +1,9 @@
 spring:
   application:
     name: 'api-gateway'
+  output:
+    ansi:
+      enabled: ALWAYS
   cloud:
     gateway:
       discovery:
