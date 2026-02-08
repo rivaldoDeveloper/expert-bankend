@@ -29,7 +29,7 @@ dependencies {
         because('Starter para validação de dados com o Spring Validation')
     }
 
-    implementation('com.fasterxml.jackson.core:jackson-databind') {
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.17.2') {
         because('Biblioteca para serialização e desserialização JSON')
     }
 
@@ -94,7 +94,9 @@ dependencies {
 
     // Dependência de teste
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'com.h2database:h2'
+    
+    // Banco de dados H2
+    implementation 'com.h2database:h2'
 }
 
 dependencyManagement {
